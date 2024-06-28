@@ -2,12 +2,12 @@
 
 # Vertex Class
 class Vertex
-  attr_accessor :connections, :row, :column, :link
+  attr_accessor :connections, :row, :column, :link, :parent
 
   def initialize
     @connections = LinkedList.new
     @row = nil
     @column = nil
-    @link = nil
+    @parent = nil
   end
 end

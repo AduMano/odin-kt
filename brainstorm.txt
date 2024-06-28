@@ -38,3 +38,31 @@ But keep in mind that we must put visited list, so we cannot go back on where we
 This is the same process on finding the paths, but once this is already built, finding the shortest path
 will be easier because we already established a connection, which we will only implement a breadth first
 search algorithm to whoever node reaches the destination first is the quickest path.
+
+
+Now using Breadth First Search for finding the shortest path, I have to read the first selected node first 
+after reading, since this project only displays a path output when the current location isnt the destination
+itself. So reading the node first and that will be used as basis for setting up parent property on the
+connections or those vertex for possible move. We will iterate the connections one by one and add them To
+the queue and visited (so that we cant traverse back to avoid inifinity) (And the queue's purpose is so if
+none of the connections arent matched to the destination, it will check of that connection of its connections).
+Aside from queue and visited, I will also implement the parent property, so that I can keep track from where
+did this connection get called (or what vertex did this get called). 
+
+if one of the connection is matched to the destination, this means we have found the destination! And
+break out of the traversing because theres no point of traversing when the target has been found.
+When it matched, I need that connection or vertex, since I applied a parent to that, I can go backtrack to 
+that to get the path form the start to end! (initially when the breadth first search starts, the current 
+vertex or the starting vertex's parent is set to nil, So that when I backtrack, we have a base case to stop
+backtracking. I will be using unshift to make the path go reverse to return a from to end array)
+
+SUCCESS!!!
+
+Output:
+move_knight([3, 3], [4, 3])
+
+=> You made it in 3 move/s! Here's your path:
+   [3, 3]
+   [1, 2]
+   [3, 1] 
+   [4, 3]

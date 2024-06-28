@@ -3,17 +3,20 @@
 require_relative('lib/board')
 
 # Init Board
-$chess = Board.new
 
 # Function Move_Knight
 def move_knight(from, to)
-  location = $chess.board[from[0]][from[1]]
+  if from.eql?(to)
+    puts 'Didn\'t move at all'
+    puts "[#{from[0]}, #{from[1]}]"
+    return
+  end
 
-  puts location.to_s
-  puts location.row
-  puts location.column
+  chess = Board.new
+  shortest_path = chess.to(from, to)
 
-  puts location.connections
+  puts "You made it in #{shortest_path.length - 1} move/s! Here's your path:"
+  shortest_path.each { |path| puts path.to_s }
 end
 
-move_knight([0, 0], [1, 2])
+move_knight([3, 3], [4, 3])

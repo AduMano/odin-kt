@@ -7,9 +7,46 @@ require_relative('vertex')
 class Board
   attr_accessor :board
 
-  def initialize()
+  def initialize
     @board = Array.new(8) { Array.new(8) { Vertex.new } }
     build_board
+  end
+
+  def to(from, to)
+    current = @board[from[0]][from[1]]
+    destination = @board[to[0]][to[1]]
+
+    # Breadth First Search
+    current.parent = nil # This sets that this is the last node for back tracking
+    queue = [current] # Push to Insert, Shift to Remove
+    visited = Set.new # To mark visited areas
+    visited.add(queue[0])
+    parent = nil
+
+    until queue.empty?
+      # From this vertex, Check all the connections first before moving on
+      read_data = queue.shift
+      parent = read_data
+
+      # Get the connections and check if they are the destination
+      node = read_data.connections.head
+
+      until node.nil?
+        unless visited.include?(node.data)
+          
+          node.data.parent = parent
+          queue.push(node.data)
+          visited.add(node.data)
+
+          # If this connection is equal to the destination, then return this vertex along with the path
+          return construct_path(from, node.data) if node.data.row.eql?(destination.row) && node.data.column.eql?(destination.column)
+        end
+
+        node = node.link
+      end
+    end
+
+    nil
   end
 
   private
@@ -47,5 +84,17 @@ class Board
     destinations.push(@board[y + 2][x + 1]) if (y + 2) <= 7 && (x + 1) <= 7
 
     destinations
+  end
+
+  def construct_path(from, node)
+    path = []
+    current = node
+
+    until current.parent.nil?
+      path.unshift([current.row, current.column])
+      current = current.parent
+    end
+
+    path.unshift(from)
   end
 end
