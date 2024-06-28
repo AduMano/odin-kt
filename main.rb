@@ -2,8 +2,6 @@
 
 require_relative('lib/board')
 
-# Init Board
-
 # Function Move_Knight
 def move_knight(from, to)
   if from.eql?(to)
@@ -11,9 +9,10 @@ def move_knight(from, to)
     puts "[#{from[0]}, #{from[1]}]"
     return
   end
-
-  chess = Board.new
-  shortest_path = chess.to(from, to)
+  
+  # Init Board
+  board = Board.new
+  shortest_path = board.find_path(from, to)
 
   puts "You made it in #{shortest_path.length - 1} move/s! Here's your path:"
   shortest_path.each { |path| puts path.to_s }

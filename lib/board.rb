@@ -12,7 +12,7 @@ class Board
     build_board
   end
 
-  def to(from, to)
+  def find_path(from, to) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     current = @board[from[0]][from[1]]
     destination = @board[to[0]][to[1]]
 
