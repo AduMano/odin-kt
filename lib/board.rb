@@ -43,8 +43,8 @@ class Board
     destinations.push(@board[y + 2][x - 1]) if (y + 2) <= 7 && (x - 1) >= 0
 
     # Check Bottom Right (2 Outcomes)
-    destinations.push(@board[y - 1][x + 2]) if (y - 1) <= 7 && (x + 2) <= 7
-    destinations.push(@board[y - 2][x + 1]) if (y - 2) <= 7 && (x + 1) <= 7
+    destinations.push(@board[y + 1][x + 2]) if (y + 1) <= 7 && (x + 2) <= 7
+    destinations.push(@board[y + 2][x + 1]) if (y + 2) <= 7 && (x + 1) <= 7
 
     destinations
   end
