@@ -1,0 +1,40 @@
+I have no idea where to start,
+I guess I have to make a 2d array, each cells contains a node (that tells which node is connected)
+
+since this is a knight, it can move 2 blocks in non diagonal direction and 1 step on side
+
+lets say I wanted to move upward, then i move the knight piece 2 blocks and choose which side do i step
+either left or right, 
+
+If i wanted to go to the right direction, move 2 blocks to the right and choose up or down (which makes a
+shape of an "L")
+
+a chess board is a 8 x 8 grid, given by input of from to destination (coordinates)
+I must find a way to get the shortest path to get to the destination. 
+
+But first, How do I build the chess board? where each square or node is connected to multiple nodes?
+I have an idea of hard coded but that would be rough and lots of lines of code.
+Its like im writing a endless if and else if statement for getting a boolean if the number is odd or even.
+Ive though of something that works like a breadth first but it doesnt actually have a connection for that
+yet. To make a connection I must get all the nodes or squares. if I start at (0, 0), I have to get the possible
+destinations path of that node, using the coordinates, since we start at zero, we can move 2 times and 1 time for
+side way, The radius we can move from all possible destination is 3 blocks (inclusive), if we start at (0, 0)
+then we can only traverse or travel by half of an arc on the right side.
+
+If all sides of the piece can travel 2 blocks then that means theres 8 possible destinations.
+since we are at (0, 0), we can only travel to (1, 2) or (2, 1) [Two steps and one step], So 2 outcomes.
+set the connection of the node in (0, 0) to (1, 2) and (2, 1) (by appending)
+then we go to those connection (1, 2) amd (2, 1) to get the possible destinations.
+
+To know if the current piece location can travel on anyside, we must check if they can move around.
+(1, 2) = this actually represents (row, column). So by checking if we can move to the left, we subtract the
+row to 2, (1 - 2 = -1) which is out of bounds, therefore we cannot go left that eliminates 2 possible destinations
+remaining only 6. check if we can go down we add 2 on the column (2 + 2 = 4) since its not 8, it means we can
+travel downwards, (x, 4), now theres only 1 step left, left or right? but we cant go to left, right?
+depends, earlier we subtracted 2, because we are making a 2 steps, but now we only have 1 step, we can go left
+or right (1 - 1 = 0) or  (1 + 1 = 2). Same process for right traveling.
+But keep in mind that we must put visited list, so we cannot go back on where we already visited. 
+
+This is the same process on finding the paths, but once this is already built, finding the shortest path
+will be easier because we already established a connection, which we will only implement a breadth first
+search algorithm to whoever node reaches the destination first is the quickest path.
